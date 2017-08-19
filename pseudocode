@@ -1,0 +1,28 @@
+//To Do List WebApp
+
+READ and SAVE "textBox"
+ONCLICK "Add Activity" CALL "addAct"
+
+Function addAct()
+"newAct" <- "textBox"
+ONCLICK "newAct" CALL "removeActlist"
+"Actlist" <- "Actlist"+"newAct" (using append child)
+CALL "saveActlist"
+
+Function saveActlist()
+localStorage.storedList <- "Actlist"
+
+Function loadActlist()
+"Actlist" <- localStorage.storedActlist;
+for(i <- 0 to "Actlist"lenght)
+ONCLICK "Actlist"[i] CALL "removeActlist"
+ENDFOR
+
+
+Function removeActlist()
+"Actlist" <- "Actlist" - "newAct" (using remove child)
+CALL saveActlist
+
+IF localStorage.storedActlist != null
+THEN "loadActlist"
+ENDIF
